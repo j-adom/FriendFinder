@@ -19,8 +19,8 @@ app.use(express.json());
 // These routes tell our server what to do when users visit or request data from various URLs.
 // =============================================================
 
-require("./routing/apiRoutes")(app);
-require("./routing/htmlRoutes")(app);
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
 // =============================================================
 // LISTENER

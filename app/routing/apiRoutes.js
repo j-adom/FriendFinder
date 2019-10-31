@@ -5,7 +5,7 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-var friendArray = require("../data/friendArray");
+var friends = require("../data/friends");
 
 
 // ===============================================================================
@@ -18,7 +18,7 @@ module.exports = function(app) {
 
  //Serves full list of friends in database
  app.get("/api/friends", function(req, res) {
-    res.json(friendArray);
+    res.json(friends);
   });
 
  
@@ -38,7 +38,7 @@ module.exports = function(app) {
     function compareScores (a, b){
         let totalDifference = 0
         for(i = 0; i < 10; i++){
-            let difference = a[i] - b[i]
+            let difference = parseInt(a[i]) - parseInt(b[i])
             let net = Math.abs(difference)
             totalDifference += net
         }
@@ -46,8 +46,8 @@ module.exports = function(app) {
     };
 
     //This loop compares user to each friend in database and saves the index of the friend with the least difference
-    for(j = 1; j < friendArray.length; j++){
-        let friendScore = friendArray[j].scores
+    for(j = 1; j < friends.length; j++){
+        let friendScore = friends[j].scores
         thisFriendDifference = compareScores(newFriendScore, friendScore)
         if(thisFriendDifference > bestFriend){
             newFriend = j
@@ -55,10 +55,10 @@ module.exports = function(app) {
     }
 
     //Add user to friend database
-    friendArray.push(req.body);
+    friends.push(req.body);
 
     //Return friend match 
-    res.json(friendArray[newFriend])
+    res.json(friends[newFriend])
 
      
   });
