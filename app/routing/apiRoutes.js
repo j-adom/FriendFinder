@@ -56,6 +56,7 @@ module.exports = function(app) {
 
     //Add user to friend database
     friends.push(req.body);
+    console.log(req.body)
 
     //Return friend match 
     res.json(friends[newFriend])
